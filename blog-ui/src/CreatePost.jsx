@@ -4,10 +4,9 @@ import { useState } from "react";
 function CreatePost({ updateUi }) {
   const [title, setTitle] = useState("");
 
-  function CreatePostHandler(e) {
+  async function CreatePostHandler(e) {
     e.preventDefault();
-    // axios.post("http://localhost:4000/posts", { title });
-
+    await axios.post("http://localhost:4000/posts", { title });
     setTitle("");
     updateUi();
   }
@@ -24,8 +23,9 @@ function CreatePost({ updateUi }) {
       <input
         type="text"
         id="post"
+        value={title}
         placeholder="Enter your post!"
-        onSubmit={(e) => setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
         className="my-5 border-1 w-full p-2 rounded-md text-lg text-grey-700 bg-white outline-0 focus:border-2 focus:box-border"
         required
       />
