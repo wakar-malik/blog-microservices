@@ -10,6 +10,7 @@ function Posts({ post }) {
     const { data } = await axios.get(
       `http://localhost:4001/comments/${post.id}`
     );
+    console.log("all comments ===", data);
     setComments(data);
   }, [post.id]);
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const axios = require("axios");
 
 const app = express();
 app.use(express.json());
@@ -11,9 +12,6 @@ const comments = {};
 
 app.get("/comments/:id", (req, res) => {
   const { id } = req.params;
-  console.log("comment get id", id);
-
-  console.log("comments", comments);
 
   res
     .status(200)
@@ -21,12 +19,9 @@ app.get("/comments/:id", (req, res) => {
     .json(comments[id] || []);
 });
 
-app.post("/comments/:id", (req, res) => {
+app.post("/comments/:id", async (req, res) => {
   const id = crypto.randomUUID();
   const { id: postId } = req.params;
-  console.log(req.body);
-  console.log(req.params);
-  console.log("comment post id", postId);
   const { title } = req.body;
 
   const comment = comments[postId] || [];
@@ -35,6 +30,11 @@ app.post("/comments/:id", (req, res) => {
     title,
   });
   comments[postId] = comment;
+
+  await axios.post("http://localhost:4002/event-bus", {
+    type: "CommentCreated",
+    data: { id, title },
+  });
 
   res
     .status(201)
