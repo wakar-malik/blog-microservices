@@ -42,4 +42,11 @@ app.post("/comment/:id", async (req, res) => {
     .json(comments[postId]);
 });
 
+app.post("/event", (req, res) => {
+  const { type } = req.body;
+  console.log("🔴", type);
+
+  res.end("event received");
+});
+
 app.listen(4001, () => console.log("Comments listening at 4001......"));

@@ -31,4 +31,12 @@ app.post("/post", async (req, res) => {
   res.status(201).header("Content-type", "text/plain").json(posts[id]);
 });
 
+app.post("/event", (req, res) => {
+  const { type } = req.body;
+
+  console.log("🔴", type);
+
+  res.end("event received");
+});
+
 app.listen(4000, () => console.log("Posts listening at 4000......"));
