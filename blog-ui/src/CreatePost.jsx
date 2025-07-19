@@ -6,7 +6,7 @@ function CreatePost({ updateUi }) {
 
   async function CreatePostHandler(e) {
     e.preventDefault();
-    await axios.post("http://localhost:4000/posts", { title });
+    await axios.post("http://localhost:4000/post", { title });
     setTitle("");
     updateUi();
   }

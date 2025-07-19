@@ -10,7 +10,7 @@ app.use(morgan("tiny"));
 
 const comments = {};
 
-app.get("/comments/:id", (req, res) => {
+app.get("/comment/:id", (req, res) => {
   const { id } = req.params;
 
   res
@@ -19,7 +19,7 @@ app.get("/comments/:id", (req, res) => {
     .json(comments[id] || []);
 });
 
-app.post("/comments/:id", async (req, res) => {
+app.post("/comment/:id", async (req, res) => {
   const id = crypto.randomUUID();
   const { id: postId } = req.params;
   const { title } = req.body;
