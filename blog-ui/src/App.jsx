@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     async function FetchPostsHandler() {
-      const { data } = await axios.get("http://localhost:4000/posts");
+      const { data } = await axios.get("http://localhost:4000/post");
       setPosts(data);
     }
     FetchPostsHandler();

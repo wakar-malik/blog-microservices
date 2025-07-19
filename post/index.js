@@ -10,11 +10,11 @@ app.use(morgan("tiny"));
 
 const posts = {};
 
-app.get("/posts", (req, res) => {
+app.get("/post", (req, res) => {
   res.status(200).header("Content-type", "application/json").json(posts);
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/post", async (req, res) => {
   const id = crypto.randomUUID();
   const { title } = req.body;
 

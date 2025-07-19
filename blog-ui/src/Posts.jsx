@@ -8,7 +8,7 @@ function Posts({ post }) {
 
   const FetchCommentsHandler = useCallback(async () => {
     const { data } = await axios.get(
-      `http://localhost:4001/comments/${post.id}`
+      `http://localhost:4001/comment/${post.id}`
     );
     console.log("all comments ===", data);
     setComments(data);
@@ -16,7 +16,7 @@ function Posts({ post }) {
 
   async function CreateCommentHandler(e) {
     e.preventDefault();
-    await axios.post(`http://localhost:4001/comments/${post.id}`, {
+    await axios.post(`http://localhost:4001/comment/${post.id}`, {
       title: title,
     });
     setTitle("");

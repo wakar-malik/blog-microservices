@@ -11,8 +11,12 @@ app.use(express.json());
 
 app.get("/event-bus", () => {});
 
-app.post("/event-bus", (req, res) => {
+app.post("/event-bus", async (req, res) => {
   console.log(req.body);
+
+  await axios.post("http://localhost:4000/post", req.body);
+  await axios.post("http://localhost:4001/comment", req.body);
+  await axios.post("http://localhost:4002/query", req.body);
 
   res.end("event received");
 });
