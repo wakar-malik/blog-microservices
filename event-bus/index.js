@@ -14,9 +14,16 @@ app.get("/event-bus", () => {});
 app.post("/event-bus", async (req, res) => {
   console.log(req.body);
 
-  await axios.post("http://localhost:4000/post", req.body);
-  await axios.post("http://localhost:4001/comment", req.body);
-  await axios.post("http://localhost:4002/query", req.body);
+  await axios.post("http://localhost:4000/event", req.body); // post service
+  await axios.post("http://localhost:4001/event", req.body); // comment service
+  await axios.post("http://localhost:4002/event", req.body); // event-bus
+
+  res.end("event received");
+});
+
+app.post("/event", (req, res) => {
+  const { type } = req.body;
+  console.log("🔴", type);
 
   res.end("event received");
 });
