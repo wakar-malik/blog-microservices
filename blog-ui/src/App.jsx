@@ -13,13 +13,15 @@ function App() {
 
   useEffect(() => {
     async function FetchPostsHandler() {
-      const { data } = await axios.get("http://localhost:4000/post");
+      const { data } = await axios.get("http://localhost:4003/query");
       setPosts(data);
     }
     FetchPostsHandler();
   }, [update]);
 
   const allPosts = Object.values(posts);
+
+  console.log(allPosts);
 
   return (
     <div className="p-5">

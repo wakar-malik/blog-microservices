@@ -1,18 +1,9 @@
 import axios from "axios";
-import { useCallback } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Posts({ post }) {
-  const [comments, setComments] = useState([]);
   const [title, setTitle] = useState("");
-
-  const FetchCommentsHandler = useCallback(async () => {
-    const { data } = await axios.get(
-      `http://localhost:4001/comment/${post.id}`
-    );
-    console.log("all comments ===", data);
-    setComments(data);
-  }, [post.id]);
+  console.log(post);
 
   async function CreateCommentHandler(e) {
     e.preventDefault();
@@ -20,14 +11,7 @@ function Posts({ post }) {
       title: title,
     });
     setTitle("");
-    FetchCommentsHandler();
   }
-
-  useEffect(() => {
-    FetchCommentsHandler();
-  }, [FetchCommentsHandler]);
-
-  const allComments = Object.values(comments);
 
   return (
     <>
@@ -35,7 +19,7 @@ function Posts({ post }) {
         <h1 className="text-2xl mb-2 text-white">{post.title}</h1>
 
         <ul className="mb-5">
-          {allComments.map((comment, i) => (
+          {post.comments.map((comment, i) => (
             <li key={comment.id}>
               {i + 1} - {comment.title}
             </li>

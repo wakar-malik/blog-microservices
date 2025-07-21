@@ -31,4 +31,11 @@ app.post("/post", async (req, res) => {
   res.status(201).header("Content-type", "text/plain").json(posts[id]);
 });
 
-app.listen(4000, () => console.log("Posts listening at 4000......"));
+app.post("/event", (req, res) => {
+  console.log(req.body.type);
+  res.end("Event received");
+});
+
+app.listen(4000, () =>
+  console.log("----- Posts service listening at 4000......")
+);

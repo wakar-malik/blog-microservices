@@ -23,6 +23,7 @@ app.post("/comment/:id", async (req, res) => {
   const id = crypto.randomUUID();
   const { id: postId } = req.params;
   const { title } = req.body;
+  console.log("===========", req.body);
 
   const comment = comments[postId] || [];
   comment.push({
@@ -32,14 +33,23 @@ app.post("/comment/:id", async (req, res) => {
   comments[postId] = comment;
 
   await axios.post("http://localhost:4002/event-bus", {
+    postId,
     type: "CommentCreated",
     data: { id, title },
   });
 
+  console.log("this=========");
   res
     .status(201)
     .header("Content-type", "application/json")
     .json(comments[postId]);
 });
 
-app.listen(4001, () => console.log("Comments listening at 4001......"));
+app.post("/event", (req, res) => {
+  console.log(req.body.type);
+  res.end("Event received");
+});
+
+app.listen(4001, () =>
+  console.log("----- Comments service listening at 4001......")
+);

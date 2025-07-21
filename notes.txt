@@ -1,3 +1,4 @@
 post service -> 4000 -> 'http://localhost:4000/post'
 comments service -> 4001 -> 'http://localhost:4001/comment'
 event-bus service -> 4002 -> 'http://localhost:4002/event-bus'
+query service -> 4003 -> 'http://localhost:4002/query'
